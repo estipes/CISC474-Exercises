@@ -1,3 +1,25 @@
+var admin = require("firebase-admin");
+var serviceAccount = require("path/to/serviceAccountKey.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://cisc474ex5-default-rtdb.firebaseio.com"
+});
+
+const { getDatabase } = require('firebase-admin/database');
+const db = getDatabase();
+const ref = db.ref('server/saving-data/');
+const usersRef = ref.child('users');
+usersRef.set({
+    alanisawesome: {
+        date_of_birth: 'June 23, 1912',
+        full_name: 'Alan Turing'
+    },
+    gracehop: {
+        date_of_birth: 'December 9, 1906',
+        full_name: 'Grace Hopper'
+    }
+});
+
 const http = require('http')
 const port = 8080
 // Create a server object:
